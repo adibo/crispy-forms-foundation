@@ -30,13 +30,15 @@
           {% endif %}
         {% else %}
           {% if field|is_file %}
-            <label class="m-file-chooser">
+            <div class="m-file-selector">
+              <label class="m-file-chooser">
           {% endif %}
           {% crispy_field field %}
           {% if field|is_file %}
-              <span class="material-icons">save_alt</span>
-              <span class="m-file-name">{% trans 'Click to select file' %} <i>{% trans 'or drop it here' %}</i></span>
-            </label>
+                <span class="material-icons">save_alt</span>
+                <span class="m-file-name">{% trans 'Click to select file' %} <i>{% trans 'or drop it here' %}</i></span>
+              </label>
+            </div>
           {% endif %}
           {% if field.help_text %}
               <div id="helptext_{{ field.auto_id }}" class="m-set-help">
