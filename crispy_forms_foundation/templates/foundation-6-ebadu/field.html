@@ -16,24 +16,27 @@
         {% endif %}
 
         <div class="m-set-content cell auto">
-        {% if field|is_checkboxselectmultiple %}
-            {% include 'foundation-6-ebadu/layout/checkboxselectmultiple.html' %}
-        {% endif %}
-        
-        {% if not field|is_checkboxselectmultiple %}
-            {% crispy_field field %}
-        {% endif %}
         {% if field|is_checkbox%}
+          <div class="m-checkbox">
+            {% crispy_field field %}
               <label{% if not fake_field %} for="{{ field.id_for_label }}"{% endif %}{% if field.errors and form_show_errors or field.field.required %} class="{% if field.field.required %}required{% endif %}{% if field.errors and form_show_errors %} is-invalid-label{% endif %}"{% endif %}>
                 {{ field.label|safe }}{% if field.field.required %}<span class="asterisk">*</span>{% endif %}
               </label>
+          </div>
+          {% if field.help_text %}
+              <div id="helptext_{{ field.auto_id }}" class="m-set-help">
+                  <span>{{ field.help_text|safe }}</span>
+              </div>
+          {% endif %}
+        {% else %}
+            {% crispy_field field %}
+            {% if field.help_text %}
+                <div id="helptext_{{ field.auto_id }}" class="m-set-help">
+                    <span>{{ field.help_text|safe }}</span>
+                </div>
+            {% endif %}
         {% endif %}
 
-        {% if field.help_text %}
-            <div id="helptext_{{ field.auto_id }}" class="m-set-help">
-                <span>{{ field.help_text|safe }}</span>
-            </div>
-        {% endif %}
 
         {% if field.field.abide_msg %}
             <span id="abide_error_{{ field.auto_id }}" class="form-error{% if form_show_errors and not field.errors|length_is:"0" %} compact{% endif %}" data-form-error-for="{{ field.id_for_label }}">
