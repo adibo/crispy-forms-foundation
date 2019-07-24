@@ -9,7 +9,7 @@
             <div class="m-set-title cell medium-3">
             {% if not field|is_checkbox %}
               <label{% if not fake_field %} for="{{ field.id_for_label }}"{% endif %}{% if field.errors and form_show_errors or field.field.required %} class="{% if field.field.required %}required{% endif %}{% if field.errors and form_show_errors %} is-invalid-label{% endif %}"{% endif %}>
-                {{ field.label|safe }}{% if field.field.required %}<span class="asterisk">*</span>{% endif %}
+                {{ field.label|safe }}
               </label>
             {% endif %}
             </div>
@@ -45,9 +45,9 @@
         {% endif %}
         
         {% if form_show_errors %}
-            <div m-set-message>
+            <div class='m-set-message'>
             {% for error in field.errors %}
-                <span id="error_{{ forloop.counter }}_{{ field.auto_id }}">
+                <span id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="error">
                     {{ error }}
                 </span>
             {% endfor %}
