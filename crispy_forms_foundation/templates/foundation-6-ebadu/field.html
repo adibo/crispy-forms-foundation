@@ -3,24 +3,36 @@
 {% if field.is_hidden %}
     {{ field }}
 {% else %}
-    <div id="div_{{ field.auto_id }}" class="holder{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field|is_checkbox %} checkbox{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">{% spaceless %}
+    <div id="div_{{ field.auto_id }}" class="holder cell grid-x{% if field.errors %} m-error alert{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field|is_checkbox %} checkbox{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">{% spaceless %}
 
         {% if field.label %}
-            {% if field|is_checkbox %}
-                {% crispy_field field %}
-            {% endif %}
-
-            <label{% if not fake_field %} for="{{ field.id_for_label }}"{% endif %}{% if field.errors and form_show_errors or field.field.required %} class="{% if field.field.required %}required{% endif %}{% if field.errors and form_show_errors %} is-invalid-label{% endif %}"{% endif %}>
+            <div class="mset-title cell medium-3">
+            {% if not field|is_checkbox %}
+              <label{% if not fake_field %} for="{{ field.id_for_label }}"{% endif %}{% if field.errors and form_show_errors or field.field.required %} class="{% if field.field.required %}required{% endif %}{% if field.errors and form_show_errors %} is-invalid-label{% endif %}"{% endif %}>
                 {{ field.label|safe }}{% if field.field.required %}<span class="asterisk">*</span>{% endif %}
-            </label>
+              </label>
+            </div>
+            {% endif %}
         {% endif %}
 
+        <div class="m-set-content cell auto">
         {% if field|is_checkboxselectmultiple %}
             {% include 'foundation-6-ebadu/layout/checkboxselectmultiple.html' %}
         {% endif %}
-
-        {% if not field|is_checkbox and not field|is_checkboxselectmultiple %}
+        
+        {% if not field|is_checkboxselectmultiple %}
             {% crispy_field field %}
+        {% endif %}
+        {% if field|is_checkbox%}
+              <label{% if not fake_field %} for="{{ field.id_for_label }}"{% endif %}{% if field.errors and form_show_errors or field.field.required %} class="{% if field.field.required %}required{% endif %}{% if field.errors and form_show_errors %} is-invalid-label{% endif %}"{% endif %}>
+                {{ field.label|safe }}{% if field.field.required %}<span class="asterisk">*</span>{% endif %}
+              </label>
+        {% endif %}
+
+        {% if field.help_text %}
+            <div id="helptext_{{ field.auto_id }}" class="m-set-help">
+                <span>{{ field.help_text|safe }}</span>
+            </div>
         {% endif %}
 
         {% if field.field.abide_msg %}
@@ -28,17 +40,16 @@
                 {{ field.field.abide_msg }}
             </span>
         {% endif %}
-
+        
         {% if form_show_errors %}
+            <div m-set-message>
             {% for error in field.errors %}
-                <span id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="form-error is-visible{% if not forloop.last %} compact{% endif %}">
+                <span id="error_{{ forloop.counter }}_{{ field.auto_id }}">
                     {{ error }}
                 </span>
             {% endfor %}
+            </div>
         {% endif %}
-
-        {% if field.help_text %}
-            <p id="helptext_{{ field.auto_id }}" class="help-text">{{ field.help_text|safe }}</p>
-        {% endif %}
+    </div>
     {% endspaceless %}</div>
 {% endif %}
