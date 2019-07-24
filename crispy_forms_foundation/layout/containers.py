@@ -67,7 +67,7 @@ class Container(crispy_forms_bootstrap.Container):
 
     def get_active_css_class(self, template_pack):
         # Foundation-6 addon only which use unusual class name
-        if template_pack == 'foundation-6':
+        if template_pack != 'foundation-5':
             return "is-active"
         return self.active_css_class
 

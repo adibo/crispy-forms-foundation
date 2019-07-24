@@ -15,12 +15,13 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = (
     'bootstrap3',
     'bootstrap4',
     'foundation-5',
-    'foundation-6'
+    'foundation-6',
+    'foundation-6-ebadu'
 )
 
 
 # Default layout pack
-CRISPY_TEMPLATE_PACK = 'foundation-6'
+CRISPY_TEMPLATE_PACK = 'foundation-6-ebadu'
 
 # Default class names on input
 CRISPY_CLASS_CONVERTERS = {
