@@ -1,11 +1,12 @@
 {% for fieldset in form.fieldsets %}{% spaceless %}
-    <fieldset class="fieldset item-{{ forloop.counter }} {{ fieldset.classes }}">
-        {% if fieldset.legend %}
-            <legend>{{ fieldset.legend }}</legend>
-        {% endif %}
-
-        {% if fieldset.description %}
-            <p class="description">{{ fieldset.description }}</p>
+    <fieldset class="m-subset item-{{ forloop.counter }} {{ fieldset.classes }}">
+        {% if fieldset.legend or fieldset.description %}
+          <div class="m-set-header cell grid-x">
+            <div class="m-set-content cell auto">
+              {% if fieldset.legend %}<h6>{{ fieldset.legend }}</h6>{% endif %}
+              {% if fieldset.description %}<p>{{ fieldset.description }}</p>{% endif %}
+            </div>
+          <div>
         {% endif %}
 
         {% for field in fieldset %}
