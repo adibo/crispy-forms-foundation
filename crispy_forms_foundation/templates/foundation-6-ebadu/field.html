@@ -16,7 +16,7 @@
         {% endif %}
 
         <div class="m-set-content cell auto">
-        {% if field|is_checkbox%}
+        {% if field|is_checkbox %}
           <div class="m-checkbox">
             {% crispy_field field %}
               <label{% if not fake_field %} for="{{ field.id_for_label }}"{% endif %}>
