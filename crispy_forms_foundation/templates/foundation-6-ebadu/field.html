@@ -3,7 +3,7 @@
 {% if field.is_hidden %}
     {{ field }}
 {% else %}
-<div id="div_{{ field.auto_id }}" class="m-set-row cell grid-x{% if field.errors %} alert{% endif %}{% if field.required %} required{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">{% spaceless %}
+<div id="div_{{ field.auto_id }}" class="m-set-row cell grid-x{% if field.errors %} alert{% endif %}{% if field.field.required %} required{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">{% spaceless %}
 
         {% if field.label %}
             <div class="m-set-title cell medium-3">
@@ -49,7 +49,7 @@
 
 
         {% if field.field.abide_msg %}
-            <span id="abide_error_{{ field.auto_id }}" class="form-error{% if form_show_errors and not field.errors|length_is:'0' %} compact{% endif %}" data-form-error-for="{{ field.id_for_label }}">
+            <span id="abide_error_{{ field.auto_id }}" class="form-error{% if form_show_errors and not field.errors|length_is:"0" %} compact{% endif %}" data-form-error-for="{{ field.id_for_label }}">
                 {{ field.field.abide_msg }}
             </span>
         {% endif %}
